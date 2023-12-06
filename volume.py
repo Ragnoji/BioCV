@@ -25,7 +25,7 @@ def draw_volume_and_calculate(points):
     # print(points)
     hull = ConvexHull(points)
     # считаем объём :D
-    print('vol', hull.volume)
+    print('vol in mm: ', hull.volume)
 
     edges = list(zip(*points))
     for i in hull.simplices:
