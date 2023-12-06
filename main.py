@@ -14,7 +14,7 @@ only_img3 = sorted(f for f in os.listdir(folder) if f.startswith('IMG-0003'))
 pts = []
 
 for index, filename in enumerate(only_img3):
-    if index < 60 or index > 62:
+    if index < 60:
         continue
     original = cv2.imread(os.path.join(folder, filename))
     gray = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
@@ -29,10 +29,6 @@ for index, filename in enumerate(only_img3):
     empty_frame = cv2.drawContours(empty_frame, [max_contour], -1, 255, -1)
     prepared = cv2.bitwise_and(gray, gray, mask=empty_frame)
 
-
-
-
-
     mask = np.zeros_like(gray)
     mask[(0 < prepared) & (prepared < 50)] = 255
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3)))
@@ -43,7 +39,7 @@ for index, filename in enumerate(only_img3):
     max_contour = max(contours, key=cv2.contourArea)
 
     output = cv2.bitwise_and(prepared, prepared, mask=mask)
-    cv2.drawContours(output, contours, -1, 255, 2)
+    cv2.drawContours(output, contours, -1, 255, -1)
 
     mm_scale = 0.8
     for i in range(0, len(contours)):
