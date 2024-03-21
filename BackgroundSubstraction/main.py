@@ -1,10 +1,10 @@
 import cv2
 import numpy as np
 
-min_contour_width = 20  # 40
-min_contour_height = 20  # 40
-offset = 2  # 10
-crossing_width = 960  # 550
+min_contour_width = 20
+min_contour_height = 20
+offset = 2
+crossing_width = 960
 matches = []
 cars = 0
 backSub = cv2.createBackgroundSubtractorMOG2()
@@ -59,13 +59,11 @@ while ret:
                 cars = cars + 1
                 matches.remove((x, y))
 
-    # cv2.drawContours(frame,contours,-1,(0,0,255),2)
     cv2.putText(frame1, f"Total cars: {cars}", (15, int(height) - 15), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
     cv2.imshow("Original", frame1)
     # cv2.imshow("Difference", open)
     if cv2.waitKey(1) == 27:
         break
     ret, frame1 = cap.read()
-# print(matches)
 cv2.destroyAllWindows()
 cap.release()
